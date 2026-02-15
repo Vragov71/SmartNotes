@@ -81,6 +81,7 @@
 
 3.  **Стартиране:**
     ```bash
+    dotnet build
     dotnet run
     ```
     Приложението ще бъде достъпно на `https://localhost:5063`.
