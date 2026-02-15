@@ -1,0 +1,42 @@
+@model IEnumerable<WebApplication1.Models.UserViewModel>
+
+@{
+    ViewData["Title"] = "Административен панел";
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">Потребители</h1>
+    
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Имейл</th>
+                            <th>Роли</th>
+                            <th>Брой бележки</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.Email</td>
+                                <td>
+                                    @foreach (var role in user.Roles)
+                                    {
+                                        <span class="badge bg-info text-dark">@role</span>
+                                    }
+                                </td>
+                                <td>@user.NoteCount</td>
+                                <td><small class="text-muted">@user.Id</small></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

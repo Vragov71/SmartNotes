@@ -1,0 +1,313 @@
+html, body, .card, .btn, .form-control, .navbar, .footer, #themeToggle, #themeToggle i, .details-fadein {
+  transition: none !important;
+  animation: none !important;
+}
+
+.details-fadein {
+  animation: none !important;
+}
+
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
+  color: #212529 !important;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+body {
+  margin-bottom: 60px;
+  color: #212529 !important;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Dark mode specific styles */
+[data-bs-theme="dark"] html, [data-bs-theme="dark"] body {
+  background-color: #212529 !important;
+  color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .navbar {
+  background-color: #343a40 !important;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .navbar-brand,
+[data-bs-theme="dark"] .nav-link {
+  color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .card {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .card-header {
+  background-color: #495057;
+  border-color: #6c757d;
+}
+
+[data-bs-theme="dark"] .card-footer {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+[data-bs-theme="dark"] .btn-outline-primary:hover {
+  color: #fff;
+  background-color: #0d6efd;
+}
+
+[data-bs-theme="dark"] .btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+[data-bs-theme="dark"] .btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+}
+
+[data-bs-theme="dark"] .footer {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .form-control {
+  background-color: #495057;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .form-control:focus {
+  background-color: #495057;
+  border-color: #0d6efd;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .img-thumbnail {
+  background-color: #495057;
+  border-color: #6c757d;
+}
+
+[data-bs-theme="dark"] .card-img-top {
+  background-color: #343a40 !important;
+  border-bottom: 1px solid #495057;
+}
+
+/* Theme toggle button styles */
+#themeToggle {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+#themeToggle:hover {
+  transform: scale(1.05);
+}
+
+#themeToggle i {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#themeToggle:hover i {
+  transform: rotate(15deg);
+}
+
+/* Only limit card-body height for note cards in the main page, not in edit forms */
+.note-card-body {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.card, .navbar, .footer {
+  background-color: #fff !important;
+  color: #212529 !important;
+  border-color: #dee2e6 !important;
+}
+
+[data-bs-theme="dark"] .card, [data-bs-theme="dark"] .navbar, [data-bs-theme="dark"] .footer {
+  background-color: #343a40 !important;
+  color: #f8f9fa !important;
+  border-color: #495057 !important;
+}
+
+/* Гарантираме, че контейнерите нямат бял фон */
+.container, main, .content-wrapper, .row, .col, .col-12, .col-md-6, .col-md-4 {
+  background: transparent !important;
+}
+
+[data-bs-theme="dark"] .container, [data-bs-theme="dark"] main, [data-bs-theme="dark"] .content-wrapper, [data-bs-theme="dark"] .row, [data-bs-theme="dark"] .col, [data-bs-theme="dark"] .col-12, [data-bs-theme="dark"] .col-md-6, [data-bs-theme="dark"] .col-md-4 {
+  background: transparent !important;
+}
+
+[data-bs-theme="light"] html, [data-bs-theme="light"] body {
+  background-color: #fff !important;
+  color: #212529 !important;
+}
+
+[data-bs-theme="light"] .card,
+[data-bs-theme="light"] .navbar,
+[data-bs-theme="light"] .footer {
+  background-color: #fff !important;
+  color: #212529 !important;
+  border-color: #dee2e6 !important;
+}
+
+[data-bs-theme="light"] .card-body,
+[data-bs-theme="light"] .card-header,
+[data-bs-theme="light"] .card-footer,
+[data-bs-theme="light"] .note-card-body,
+[data-bs-theme="light"] .note-card-content,
+[data-bs-theme="light"] .note-card-inner {
+  background-color: #fff !important;
+  color: #212529 !important;
+}
+
+[data-bs-theme="dark"] .card-body,
+[data-bs-theme="dark"] .card-header,
+[data-bs-theme="dark"] .card-footer,
+[data-bs-theme="dark"] .note-card-body,
+[data-bs-theme="dark"] .note-card-content,
+[data-bs-theme="dark"] .note-card-inner {
+  background-color: #343a40 !important;
+  color: #f8f9fa !important;
+}
+
+[data-bs-theme="light"] .card-header,
+[data-bs-theme="light"] .note-card-header,
+[data-bs-theme="light"] .note-card-image,
+[data-bs-theme="light"] .note-image-header,
+[data-bs-theme="light"] .note-header,
+[data-bs-theme="light"] .card > * {
+  background-color: #fff !important;
+  color: #212529 !important;
+}
+
+[data-bs-theme="light"] .form-control,
+[data-bs-theme="light"] .card,
+[data-bs-theme="light"] .card-body,
+[data-bs-theme="light"] .list-group-item,
+[data-bs-theme="light"] .container,
+[data-bs-theme="light"] main {
+  background-color: #fff !important;
+  color: #212529 !important;
+}
+
+/* Additional Dark Mode Styles for Identity Pages */
+[data-bs-theme="dark"] .list-group-item {
+  background-color: #343a40;
+  color: #f8f9fa;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .table {
+  color: #f8f9fa;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .table-hover tbody tr:hover {
+  color: #f8f9fa;
+  background-color: #3e444a;
+}
+
+[data-bs-theme="dark"] .alert-warning {
+    background-color: #332701;
+    border-color: #664d03;
+    color: #ffda6a;
+}
+
+[data-bs-theme="dark"] .alert-danger {
+    background-color: #2c0b0e;
+    border-color: #842029;
+    color: #ea868f;
+}
+
+[data-bs-theme="dark"] .alert-info {
+    background-color: #032830;
+    border-color: #055160;
+    color: #6edff6;
+}
+
+[data-bs-theme="dark"] .alert-success {
+    background-color: #051b11;
+    border-color: #0f5132;
+    color: #75b798;
+}
+
+[data-bs-theme="dark"] .bg-white {
+    background-color: #343a40 !important;
+}
+
+[data-bs-theme="dark"] .text-dark {
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] a.text-dark:hover, [data-bs-theme="dark"] a.text-dark:focus {
+    color: #adb5bd !important;
+}
+
+/* Identity Pages Specific Fixes */
+[data-bs-theme="dark"] .form-floating > label {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .form-floating > .form-control:focus ~ label,
+[data-bs-theme="dark"] .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #adb5bd;
+    background-color: transparent; 
+}
+
+[data-bs-theme="dark"] .form-floating > .form-control:-webkit-autofill {
+    -webkit-text-fill-color: #f8f9fa;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+[data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, [data-bs-theme="dark"] h3 {
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] section {
+    background-color: transparent !important;
+}
+
+[data-bs-theme="dark"] .nav-pills .nav-link.active, 
+[data-bs-theme="dark"] .nav-pills .show > .nav-link {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .nav-pills .nav-link {
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .profile-nav-link {
+    color: #f8f9fa !important;
+}

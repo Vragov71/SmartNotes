@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Начало";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Добре дошли в SmartNotes</h1>
+    <p>Тук можете да създавате, редактирате и споделяте вашите бележки.</p>
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg" href="/Identity/Account/Register">Регистрация</a>
+            <a class="btn btn-secondary btn-lg" href="/Identity/Account/Login">Вход</a>
+        </div>
+    }
+    else
+    {
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg" href="/Note/Index">Към моите бележки</a>
+        </div>
+    }
+</div>

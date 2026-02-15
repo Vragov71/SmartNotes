@@ -1,0 +1,179 @@
+@model WebApplication1.Models.Note
+
+@{
+    ViewData["Title"] = "Редактиране на бележка";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title h4 mb-0">Редактиране на бележка</h2>
+                </div>
+                <div class="card-body">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            <b>ModelState грешки:</b>
+                            <ul>
+                            @foreach (var entry in ViewData.ModelState)
+                            {
+                                if (entry.Value.Errors.Count > 0)
+                                {
+                                    <li><b>@entry.Key</b>: @string.Join(", ", entry.Value.Errors.Select(e => e.ErrorMessage))</li>
+                                }
+                            }
+                            </ul>
+                        </div>
+                    }
+                    @if (TempData["EditError"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["EditError"]</div>
+                    }
+                    <form method="post" action="/Note/Edit/@Model.Id" enctype="multipart/form-data" autocomplete="off" novalidate>
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <input type="hidden" name="CreatedAt" value="@Model.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ss")" />
+                        <div class="mb-3">
+                            <label class="form-label">Име:</label>
+                            <input type="text" name="Title" value="@Model.Title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Съдържание:</label>
+                            <textarea name="Content" class="form-control" rows="5" required>@Model.Content</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Етикети (разделени със запетая):</label>
+                            <input type="text" name="tags" value="@string.Join(", ", Model.Tags.Select(t => t.Name))" class="form-control" placeholder="работа, идеи, важно">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Добави нови снимки:</label>
+                            <input type="file" name="imageFiles" class="form-control" multiple accept="image/*">
+                            <div class="form-text">Можете да изберете няколко снимки едновременно.</div>
+                        </div>
+                        @if (Model.Images != null && Model.Images.Any())
+                        {
+                            <div class="mb-3">
+                                <label class="form-label">Текущи снимки:</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach (var image in Model.Images)
+                                    {
+                                        <div class="position-relative image-removable" data-image-id="@image.Id">
+                                            <img src="/images/@image.ImageUrl" alt="Note Image" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+                                            <button type="button" class="btn btn-danger btn-sm rounded-circle position-absolute top-0 end-0 m-1 remove-image-btn" data-image-id="@image.Id">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <input class="form-check-input d-none" type="checkbox" name="deleteImageIds" value="@image.Id" id="deleteImage_@image.Id">
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <div class="mb-3">
+                            <label class="form-label">Добави нови файлове:</label>
+                            <input type="file" name="noteFiles" class="form-control" multiple>
+                            <div class="form-text">Можете да изберете няколко файла едновременно (всякакъв тип).</div>
+                        </div>
+                        @if (Model.Files != null && Model.Files.Any())
+                        {
+                            <div class="mb-3">
+                                <label class="form-label">Текущи файлове:</label>
+                                <ul class="list-group">
+                                    @foreach (var file in Model.Files)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center file-removable" data-file-id="@file.Id" id="file-li-@file.Id">
+                                            <span>@file.OriginalName</span>
+                                            <span>
+                                                <a href="/Note/DownloadFile?fileName=@file.FileName" class="btn btn-success btn-sm me-2" style="min-width: 90px;">
+                                                    <i class="fas fa-download"></i> Изтегли
+                                                </a>
+                                                <button type="button" class="btn btn-danger btn-sm remove-file-btn" data-file-id="@file.Id"><i class="fas fa-times"></i></button>
+                                                <input class="form-check-input d-none" type="checkbox" name="deleteFileIds" value="@file.Id" id="deleteFile_@file.Id">
+                                            </span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Запази
+                            </button>
+                            <a href="/Note/Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Отказ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        html, body {
+            min-height: 100vh !important;
+            background: #fff;
+        }
+        .card {
+            border: none;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+        .btn-danger.btn-sm {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            line-height: 24px;
+            text-align: center;
+        }
+        .container, .card, .card-body {
+            background-color: #fff !important;
+            color: #212529;
+        }
+        [data-bs-theme="dark"] html,
+        [data-bs-theme="dark"] body {
+            min-height: 100vh !important;
+            background-color: #23272b !important;
+            color: #f8f9fa;
+        }
+        [data-bs-theme="dark"] .container,
+        [data-bs-theme="dark"] .card,
+        [data-bs-theme="dark"] .card-body {
+            background-color: #23272b !important;
+            color: #f8f9fa;
+        }
+        [data-bs-theme="dark"] .list-group-item {
+            background-color: #23272b !important;
+            color: #f8f9fa;
+            border-color: #343a40;
+        }
+    </style>
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.body.addEventListener('click', function (e) {
+            if (e.target.closest('.remove-image-btn')) {
+                const btn = e.target.closest('.remove-image-btn');
+                const id = btn.getAttribute('data-image-id');
+                document.getElementById('deleteImage_' + id).checked = true;
+                btn.closest('.image-removable').style.display = 'none';
+            }
+            if (e.target.closest('.remove-file-btn')) {
+                const btn = e.target.closest('.remove-file-btn');
+                const id = btn.getAttribute('data-file-id');
+                document.getElementById('deleteFile_' + id).checked = true;
+                let li = document.getElementById('file-li-' + id) || btn.closest('.file-removable') || btn.closest('li');
+                if (li) {
+                    li.style.transition = 'opacity 0.3s';
+                    li.style.opacity = '0';
+                    setTimeout(() => { li.style.display = 'none'; }, 300);
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,81 @@
+@model IEnumerable<WebApplication1.Models.Note>
+
+@{
+    ViewData["Title"] = "Бележки";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-4">Моите бележки</h1>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Нова бележка
+        </a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <a href="/Note/Details/@item.Id" class="card shadow-sm note-expand-card text-decoration-none text-reset" tabindex="0" style="cursor:pointer; display:block;">
+                    <div class="card-header bg-transparent border-bottom-0 d-flex align-items-center justify-content-between" style="padding: 1.5rem 1.5rem 0.5rem 1.5rem;">
+                        <h4 class="card-title mb-0" style="font-size: 2rem;">@item.Title</h4>
+                    </div>
+                    @if (item.Tags != null && item.Tags.Any())
+                    {
+                        <div class="px-3 pb-2">
+                            @foreach (var tag in item.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag.Name</span>
+                            }
+                        </div>
+                    }
+                    @if (item.Images != null && item.Images.Any())
+                    {
+                        <div class="card-img-top p-3">
+                            <div class="d-flex gap-3 overflow-auto">
+                                @foreach (var image in item.Images)
+                                {
+                                    <img src="/images/@image.ImageUrl" alt="Note Image" class="img-thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
+                                }
+                            </div>
+                        </div>
+                    }
+                    @if (item.Files != null && item.Files.Any())
+                    {
+                        <div class="px-3 pb-2 text-muted" style="font-size: 1rem;">
+                            <i class="fas fa-paperclip"></i> Прикачени файлове: @item.Files.Count
+                        </div>
+                    }
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            min-height: 260px;
+            min-width: 320px;
+            max-width: 480px;
+            margin: auto;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 0 2px #0d6efd;
+        }
+        .btn-group .btn {
+            flex: 1;
+        }
+        .note-expand-card:focus {
+            outline: 2px solid #0d6efd;
+        }
+        .card-title {
+            font-size: 2rem;
+        }
+        .card-img-top img {
+            width: 140px !important;
+            height: 140px !important;
+        }
+    </style>
+}

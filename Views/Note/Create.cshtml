@@ -1,0 +1,69 @@
+@model WebApplication1.Models.Note
+
+@{
+    ViewData["Title"] = "Нова бележка";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title h4 mb-0">Създаване на нова бележка</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/Note/Create" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div class="mb-3">
+                            <label class="form-label">Име:</label>
+                            <input type="text" name="Title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Съдържание:</label>
+                            <textarea name="Content" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Етикети (разделени със запетая):</label>
+                            <input type="text" name="tags" class="form-control" placeholder="работа, идеи, важно">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Качи снимки:</label>
+                            <input type="file" name="imageFiles" class="form-control" multiple accept="image/*">
+                            <div class="form-text">Можете да изберете няколко снимки едновременно.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Качи файлове:</label>
+                            <input type="file" name="noteFiles" class="form-control" multiple>
+                            <div class="form-text">Можете да изберете няколко файла едновременно (всякакъв тип).</div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Запази
+                            </button>
+                            <a href="/Note/Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Отказ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+        [data-bs-theme="dark"] .container,
+        [data-bs-theme="dark"] .card,
+        [data-bs-theme="dark"] .card-body {
+            background-color: #23272b !important;
+            color: #f8f9fa;
+        }
+    </style>
+}

@@ -1,0 +1,70 @@
+@model WebApplication1.Models.Note
+
+@{
+    ViewData["Title"] = "Изтриване на бележка";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="card-title h4 mb-0">Изтриване на бележка</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Сигурни ли сте, че искате да изтриете тази бележка?
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Име:</dt>
+                        <dd class="col-sm-9">@Model.Title</dd>
+                        
+                        <dt class="col-sm-3">Съдържание:</dt>
+                        <dd class="col-sm-9">@Model.Content</dd>
+                        
+                        <dt class="col-sm-3">Дата на създаване:</dt>
+                        <dd class="col-sm-9">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</dd>
+
+                        @if (Model.Images != null && Model.Images.Any())
+                        {
+                            <dt class="col-sm-3">Снимки:</dt>
+                            <dd class="col-sm-9">
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach (var image in Model.Images)
+                                    {
+                                        <img src="/images/@image.ImageUrl" alt="Note Image" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+                                    }
+                                </div>
+                            </dd>
+                        }
+                    </dl>
+                    
+                    <form asp-action="Delete" class="mt-4">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Изтрий
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Отказ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+        }
+        .alert {
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+}
